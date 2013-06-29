@@ -1,0 +1,1 @@
+../../watoolkitios/library/Library/Authentication/WAAuthenticationCredential.h

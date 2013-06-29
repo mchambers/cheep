@@ -1,0 +1,1 @@
+../../watoolkitios/library/Library/Private/WAAuthenticationCredential+Private.h

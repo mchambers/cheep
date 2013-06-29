@@ -1,0 +1,48 @@
+// ----------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// ----------------------------------------------------------------------------
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+#import "QSAppDelegate.h"
+
+@implementation QSAppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    NSString* authToken;
+    NSString* curUser;
+    
+    authToken=[[NSUserDefaults standardUserDefaults] stringForKey:@"mobileServiceAuthenticationToken"];
+    curUser=[[NSUserDefaults standardUserDefaults] stringForKey:@"mobileServiceUserId"];
+    
+    if(curUser!=nil && authToken!=nil)
+    {
+        MSUser* user=[[MSUser alloc] initWithUserId:curUser];
+        user.mobileServiceAuthenticationToken=authToken;
+        [[QSTodoService defaultService] setCurrentUser:user];
+    }
+    
+    if([[QSTodoService defaultService] currentUser]!=nil)
+    {
+        
+    }
+    else
+    {
+        self.window.rootViewController=[self.window.rootViewController.storyboard instantiateViewControllerWithIdentifier:@"WelcomeView"];
+    }
+    
+    return YES;
+}
+
+@end
