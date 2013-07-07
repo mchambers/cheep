@@ -37,19 +37,23 @@
 
 -(void)connectWithIdentityProvider:(NSString*)provider
 {
-    MSClient* client=[[QSTodoService defaultService] client];
+    MSClient* client=[[QSChirpService defaultService] client];
     
     [client loginWithProvider:provider controller:self animated:YES completion:^(MSUser *user, NSError *error) {
         if(user!=nil && error==nil)
         {
-            [[QSTodoService defaultService] setCurrentUser:user];
+            [[QSChirpService defaultService] setCurrentUser:user];
+            
+            // tell the service to generate a profile for us
+            MSTable* profileTable=[client tableWithName:@"Profile"];
+            [profileTable insert:@{@"created":[NSDate date]} completion:^(NSDictionary *item, NSError *error) {
+                [self performSegueWithIdentifier:@"Login" sender:self];
+            }];
             
             NSLog(@"User logged in: id %@, token %@", user.userId, user.mobileServiceAuthenticationToken);
             [[NSUserDefaults standardUserDefaults] setValue:user.mobileServiceAuthenticationToken forKey:@"mobileServiceAuthenticationToken"];
             [[NSUserDefaults standardUserDefaults] setValue:user.userId forKey:@"mobileServiceUserId"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [self performSegueWithIdentifier:@"Login" sender:self];
         }
         else
         {

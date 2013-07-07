@@ -122,7 +122,7 @@ static const float background[] =
   self.vertexBuffer = [[AGLKVertexAttribArrayBuffer alloc]
                        initWithAttribStride:(GLsizeiptr)5*sizeof(float) numberOfVertices:6 bytes:background
                        usage:GL_STATIC_DRAW];
-  CGImageRef imageRef = [[UIImage imageNamed:@"IMG_BgGraphique"] CGImage];
+  CGImageRef imageRef = [[UIImage imageNamed:@"oscilloscopebg"] CGImage];
   if (imageRef) {
     GLKTextureInfo *textureInfo = [GLKTextureLoader textureWithCGImage:imageRef
                                                                options:@{GLKTextureLoaderOriginBottomLeft:@(YES)}

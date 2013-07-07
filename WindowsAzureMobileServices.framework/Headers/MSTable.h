@@ -19,9 +19,7 @@
 
 @class MSQuery;
 
-
 #pragma mark * Block Type Definitions
-
 
 // Callback for updates, inserts or readWithId requests. If there was an
 // error, the |error| will be non-nil.
@@ -43,14 +41,12 @@ typedef void (^MSReadQueryBlock)(NSArray *items,
 
 #pragma mark * MSTable Public Interface
 
-
 // The |MSTable| class represents a table of a Windows Azure Mobile Service.
 // Items can be inserted, updated, deleted and read from the table. The table
 // can also be queried to retrieve an array of items that meet the given query
 // conditions. All table operations result in a request to the Windows Azure
 // Mobile Service to perform the given operation.
 @interface MSTable : NSObject
-
 
 #pragma mark * Public Readonly Properties
 

@@ -1,19 +1,22 @@
 PODS:
   - DACircularProgress (2.1.0)
+  - GPUImage (0.1.0)
   - RESideMenu (1.0.1)
   - TheAmazingAudioEngine (1.0)
-  - watoolkitios (1.5)
+  - YRDropdownView (0.0.1)
 
 DEPENDENCIES:
   - DACircularProgress (~> 2.1.0)
-  - RESideMenu (~> 1.0.1)
+  - GPUImage (~> 0.1.0)
+  - RESideMenu
   - TheAmazingAudioEngine (~> 1.0)
-  - watoolkitios (~> 1.5)
+  - YRDropdownView (~> 0.0.1)
 
 SPEC CHECKSUMS:
   DACircularProgress: 8c8f20c8dffdd647fbf570ddecbc2b1b59da5888
+  GPUImage: 5b902c1df2afe0ac30a8e3e7379f9c0bb25c7c85
   RESideMenu: 85572ea1c3bb7013937dc2c65bbe3ad0748130dc
   TheAmazingAudioEngine: b500d625289dbac922c184bb951167fdb30c6fdc
-  watoolkitios: defcbbc71e8be4111fa4699305b12622a8c1f0cc
+  YRDropdownView: 6cd453679912af8d45cf73ea8d9e079885b99012
 
 COCOAPODS: 0.20.2

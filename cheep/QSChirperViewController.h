@@ -31,5 +31,7 @@
 - (IBAction)recordButtonDown:(id)sender;
 - (IBAction)recordButtonUp:(id)sender;
 @property (strong, nonatomic) IBOutlet DACircularProgressView *recordProgress;
+@property (strong, nonatomic) IBOutlet UILabel *recordingLabel;
+@property (strong, nonatomic) IBOutlet UILabel *tapToRecordLabel;
 
 @end

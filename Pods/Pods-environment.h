@@ -12,6 +12,12 @@
 #define COCOAPODS_VERSION_MINOR_DACircularProgress 1
 #define COCOAPODS_VERSION_PATCH_DACircularProgress 0
 
+// GPUImage
+#define COCOAPODS_POD_AVAILABLE_GPUImage
+#define COCOAPODS_VERSION_MAJOR_GPUImage 0
+#define COCOAPODS_VERSION_MINOR_GPUImage 1
+#define COCOAPODS_VERSION_PATCH_GPUImage 0
+
 // RESideMenu
 #define COCOAPODS_POD_AVAILABLE_RESideMenu
 #define COCOAPODS_VERSION_MAJOR_RESideMenu 1
@@ -24,9 +30,9 @@
 #define COCOAPODS_VERSION_MINOR_TheAmazingAudioEngine 0
 #define COCOAPODS_VERSION_PATCH_TheAmazingAudioEngine 0
 
-// watoolkitios
-#define COCOAPODS_POD_AVAILABLE_watoolkitios
-#define COCOAPODS_VERSION_MAJOR_watoolkitios 1
-#define COCOAPODS_VERSION_MINOR_watoolkitios 5
-#define COCOAPODS_VERSION_PATCH_watoolkitios 0
+// YRDropdownView
+#define COCOAPODS_POD_AVAILABLE_YRDropdownView
+#define COCOAPODS_VERSION_MAJOR_YRDropdownView 0
+#define COCOAPODS_VERSION_MINOR_YRDropdownView 0
+#define COCOAPODS_VERSION_PATCH_YRDropdownView 1
 

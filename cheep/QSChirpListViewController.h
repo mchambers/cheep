@@ -1,4 +1,4 @@
-// ----------------------------------------------------------------------------
+﻿// ----------------------------------------------------------------------------
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // ----------------------------------------------------------------------------
 //
@@ -15,21 +15,19 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QSChirpService.h"
-#import <AEAudioController.h>
-#import <AEAudioFilePlayer.h>
-#import <AEBlockFilter.h>
+#import <RESideMenu.h>
+#import <GLKit/GLKit.h>
 
-@interface QSAppDelegate : UIResponder <UIApplicationDelegate, NSURLConnectionDataDelegate>
+@interface QSChirpListViewController : UITableViewController
 {
-    NSMutableData* _chirpData;
+    RESideMenu* sideMenu;
 }
+@property (weak, nonatomic) IBOutlet UITextField                *itemText;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView    *activityIndicator;
 
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) AEAudioController* audioController;
-@property (strong, nonatomic) NSURLConnection* chirpLoader;
+@property (nonatomic, strong) GLKView* currentGLView;
 
--(void)playChirp:(NSURL*)urlToChirp;
--(void)stopChirp;
+- (IBAction)leftMenuButtonTap:(id)sender;
+
 
 @end

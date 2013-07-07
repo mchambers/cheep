@@ -36,8 +36,22 @@
     maximumDuration=6.0000; // THE ENTIRE APP IS BASED ON THIS LINE OF CODE
     timeRemaining=maximumDuration;
     
-    [self.recordProgress setTrackTintColor:[UIColor lightGrayColor]];
-    [self.recordProgress setProgressTintColor:[UIColor blueColor]];
+    [self.recordProgress setTrackTintColor:[UIColor colorWithRed:91.0f/255.0f green:86.0f/255.0f blue:87.0f/255.0f alpha:1.0f]];
+    [self.recordProgress setProgressTintColor:[UIColor colorWithRed:219.0f/255.0f green:121.0f/255.0f blue:114.0f/255.0f alpha:1.0f]];
+    
+    self.recordButton.enabled=NO;
+    self.tapToRecordLabel.text=@"Hang on...";
+    
+    // get the recorder ready without impacting the UI
+    // we want it to be ready before they tap the button
+    // so it doesn't stutter for a second before it starts
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self prepareToRecord];
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+            self.recordButton.enabled=YES;
+            self.tapToRecordLabel.text=@"Tap and hold to record";
+        });
+    });
 }
 
 - (void)didReceiveMemoryWarning
@@ -50,6 +64,8 @@
     [self setRecordButton:nil];
     [self setTimeRemainingLabel:nil];
     [self setRecordProgress:nil];
+    [self setRecordingLabel:nil];
+    [self setTapToRecordLabel:nil];
     [super viewDidUnload];
 }
 
@@ -131,7 +147,7 @@
         [heartbeat invalidate];
         heartbeat=nil;
     }
-            
+    
     if(!recorder)
         [self prepareToRecord];
     
@@ -143,6 +159,10 @@
     [heartbeat addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
     
     [recorder record];
+    
+    self.tapToRecordLabel.hidden=YES;
+    self.recordingLabel.hidden=NO;
+    
     NSLog(@"Recording started with %f remaining", timeRemaining);
     
     recording=YES;
@@ -159,16 +179,24 @@
     
     [recorder pause];
     
+    self.tapToRecordLabel.hidden=NO;
+    self.recordingLabel.hidden=YES;
+    
     if(timeRemaining<=0)
     {
        [self.recordButton setEnabled:NO];
         self.timeRemainingLabel.text=@"0.0s";
-        
-        [recorder stop];
-        recorder=nil;
-        
-        long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[audioFileURL absoluteString] error:nil][NSFileSize] longLongValue];
-        NSLog(@"File should be available at %@, size is %lld", audioFileURL, fileSize);
+        self.tapToRecordLabel.text=@"...hang on...";
+
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void){
+            [recorder stop];
+            recorder=nil;
+            
+            dispatch_async(dispatch_get_main_queue(), ^(void) {
+                self.tapToRecordLabel.text=@"...done!";
+                [self performSegueWithIdentifier:@"completeChirp" sender:self];
+            });
+        });        
     }
 }
 @end

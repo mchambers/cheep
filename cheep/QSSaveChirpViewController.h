@@ -13,16 +13,22 @@
 #import "ATWaveFormViewController.h"
 #import <AEFloatConverter.h>
 #import "SSTextView.h"
+#import "QSChirpService.h"
+#import <DACircularProgressView.h>
 
-@interface QSSaveChirpViewController : UIViewController
+@interface QSSaveChirpViewController : UIViewController <NSURLConnectionDataDelegate>
 {
     AEAudioController* _audioController;
     AEFloatConverter* _converter;
     AudioBufferList* _processBuffer;
 }
+@property (strong, nonatomic) IBOutlet UILabel *chirpingLabel;
+@property (strong, nonatomic) IBOutlet DACircularProgressView *chirpingProgress;
 
 @property (nonatomic, strong) NSURL* audioFileURL;
 @property (nonatomic, strong) ATWaveFormViewController* waveFormController;
 @property (strong, nonatomic) IBOutlet SSTextView *chirpCaption;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *doneButton;
 
+- (IBAction)doneButtonTapped:(id)sender;
 @end

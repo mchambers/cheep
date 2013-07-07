@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "QSTodoService.h"
+#import "QSChirpService.h"
 
 @interface QSWelcomeViewController : UIViewController
 - (IBAction)connectWithFacebook:(id)sender;
