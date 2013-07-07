@@ -23,6 +23,7 @@
 @interface QSAppDelegate : UIResponder <UIApplicationDelegate, NSURLConnectionDataDelegate>
 {
     NSMutableData* _chirpData;
+    NSURL* _originalChirpURL;
 }
 
 @property (strong, nonatomic) UIWindow *window;

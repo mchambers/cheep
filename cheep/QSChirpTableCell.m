@@ -15,13 +15,24 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         // Initialization code
-        self.soundWaveController=[[ATWaveFormViewController alloc] init];
-        self.soundWaveDisplay=(GLKView*)[self viewWithTag:3];
-        self.soundWaveController.view=self.soundWaveDisplay;
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chirpPlaybackChanged:) name:@"chirpPlaybackChanged" object:nil];
     }
     return self;
+}
+
+-(void)awakeFromNib
+{
+    self.soundWaveController=[[ATWaveFormViewController alloc] init];
+    self.soundWaveDisplay=(GLKView*)[self viewWithTag:3];
+    self.soundWaveController.view=self.soundWaveDisplay;
+    
+    [self.soundWaveController viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(chirpPlaybackChanged:) name:@"chirpPlaybackChanged" object:nil];
+}
+
+-(void)prepareForReuse
+{
+    [super prepareForReuse];
 }
 
 -(void)dealloc

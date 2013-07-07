@@ -77,6 +77,8 @@
             self.chirpLoader=nil;
         }
         
+        _originalChirpURL=urlToChirp;
+        
         self.chirpLoader=[[NSURLConnection alloc] initWithRequest:chirpLoadRequest delegate:self startImmediately:NO];
         [self.chirpLoader scheduleInRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
         [self.chirpLoader start];
@@ -125,7 +127,7 @@
     
     [_audioController start:NULL];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"chirpPlaybackChanged" object:nil userInfo:@{@"chirpUri":urlToChirp}];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"chirpPlaybackChanged" object:nil userInfo:@{@"chirpUri":_originalChirpURL}];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

@@ -136,9 +136,19 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    static NSIndexPath* lastTapped;
+    QSAppDelegate* delegate=(QSAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+    if(lastTapped && lastTapped.row==indexPath.row)
+    {
+        [delegate stopChirp];
+        return;
+    }
+    
+    lastTapped=indexPath;
+
     NSDictionary* item=[self.todoService.items objectAtIndex:indexPath.row];
     
-    QSAppDelegate* delegate=(QSAppDelegate*)[[UIApplication sharedApplication] delegate];
     NSURL* chirpURL=[NSURL URLWithString:item[@"chirpUri"]];
     [delegate playChirp:chirpURL];
 }
